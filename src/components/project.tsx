@@ -1,5 +1,6 @@
 import React from 'react';
 import { Inria_Serif, Inconsolata } from 'next/font/google';
+import Image from 'next/image';
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -12,13 +13,20 @@ const inconsolata = Inconsolata({
   display: 'swap',
 });
 
-const ProjectCard = ({ title, description, imageUrl }) => (
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+const ProjectCard = ({ title, description, imageUrl }: ProjectCardProps) => (
   <div className="group relative rounded-3xl overflow-hidden bg-CCF1F5 border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[2px_2px_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150">
-    <div className="aspect-[16/9] w-full overflow-hidden">
-      <img 
+    <div className="aspect-[16/9] w-full overflow-hidden relative">
+      <Image 
         src={imageUrl} 
         alt={title}
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
       />
     </div>
     <div className="absolute bottom-0 left-0 right-0 bg-CCF1F5 p-4">
@@ -46,7 +54,7 @@ const ProjectsSection = () => {
     },
     {
       title: "Data Sun",
-      description: "Creating a recommendation system for Cornell's newspaper",
+      description: "Creating a recommendation system for Cornell&apos;s newspaper",
       imageUrl: "/api/placeholder/800/600"
     },
     {
@@ -84,7 +92,7 @@ const ProjectsSection = () => {
           <div className={`${inconsolata.className} w-2/3 space-y-4 text-lg text-gray-900`}>
             <p>
               This section contains most of the projects - mostly code and links to my
-              GitHub - that I've worked on. A lot of these projects were collaborations
+              GitHub - that I&apos;ve worked on. A lot of these projects were collaborations
               with other really smart people.
             </p>
             <p>

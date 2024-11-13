@@ -14,7 +14,7 @@ const inconsolata = Inconsolata({
   display: 'swap',
 });
 
-const ContactButton = ({ icon: Icon, children }) => (
+const ContactButton = ({ icon: Icon, children }: { icon: React.ElementType, children: React.ReactNode }) => (
   <button className={`flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#CCF1F5] ${inconsolata.className} text-gray-800 text-lg
     border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)]
     hover:shadow-[2px_2px_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]
@@ -25,10 +25,15 @@ const ContactButton = ({ icon: Icon, children }) => (
 );
 
 const ChatInterface = () => {
-  const [messages, setMessages] = useState([]);
+  interface Message {
+    text: string;
+    sender: 'user' | 'bot';
+  }
+  
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputText.trim()) return;
     
