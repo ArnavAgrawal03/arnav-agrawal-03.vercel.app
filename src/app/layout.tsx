@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Arnav Agrawal's Website",
+  title: "Arnav's Website",
   description: "Arnav Agrawal's website",
 };
 

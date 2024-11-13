@@ -21,7 +21,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, description, imageUrl }: ProjectCardProps) => (
   <div className="group relative rounded-3xl overflow-hidden bg-CCF1F5 border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[2px_2px_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150">
-    <div className="aspect-[16/9] w-full overflow-hidden relative">
+    <div className="aspect-[16/9] w-full overflow-hidden relative h-[60%]">
       <Image 
         src={imageUrl} 
         alt={title}
@@ -29,7 +29,7 @@ const ProjectCard = ({ title, description, imageUrl }: ProjectCardProps) => (
         className="object-cover"
       />
     </div>
-    <div className="absolute bottom-0 left-0 right-0 bg-CCF1F5 p-4">
+    <div className="absolute bottom-0 left-0 right-0 bg-CCF1F5 p-4 h-[40%] flex flex-col justify-center">
       <h3 className={`${inriaSerif.className} text-xl font-medium mb-1 text-gray-900`}>
         {title}
       </h3>
@@ -45,32 +45,32 @@ const ProjectsSection = () => {
     {
       title: "ProveML",
       description: "A natural-language theorem prover for proposition logic",
-      imageUrl: "/api/placeholder/800/600" // Replace with actual image path
+      imageUrl: "/project-thumbnails/theorem-prover-quanta.jpg"
     },
     {
       title: "Pollution and the Price of Anarchy", 
       description: "How bad can selfish-routing get vs the social optimum?",
-      imageUrl: "/api/placeholder/800/600"
+      imageUrl: "/project-thumbnails/pollution.jpg"
     },
     {
       title: "Data Sun",
       description: "Creating a recommendation system for Cornell&apos;s newspaper",
-      imageUrl: "/api/placeholder/800/600"
+      imageUrl: "/project-thumbnails/recommendations.webp"
     },
     {
       title: "HoopTracker",
       description: "Detailed statistics on pickup basketball games",
-      imageUrl: "/api/placeholder/800/600"
+      imageUrl: "/project-thumbnails/hooptracker.webp"
     },
     {
       title: "Beyond Vector Search: Axiomatic RAG",
       description: "Using traditional AI for retrieval",
-      imageUrl: "/api/placeholder/800/600"
+      imageUrl: "/project-thumbnails/axiomatic-retrieval.webp"
     },
     {
       title: "BrandSync",
       description: "Create, and post graphics and text for Social Media",
-      imageUrl: "/api/placeholder/800/600"
+      imageUrl: "/project-thumbnails/brandsync.png"
     }
   ];
 
