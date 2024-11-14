@@ -238,7 +238,7 @@ const HeroSection = () => {
             <Link href="#contact-section">
               <NeumorphicButton icon={Calendar}>Book a time</NeumorphicButton>
             </Link>
-            <Link href="https://github.com/arnavagrawal">
+            <Link href="https://github.com/arnavagrawal03">
               <NeumorphicButton icon={Github}>GitHub</NeumorphicButton>
             </Link>
           </div>
