@@ -34,7 +34,7 @@ const Quote = ({ text, language = 'en' }: { text: string, language?: string }) =
     <blockquote className={`text-xl italic text-black ${
       language === 'hi' ? inriaSerif.className : inconsolata.className
     }`}>
-      "{text}"
+      &ldquo;{text}&rdquo;
     </blockquote>
     {language === 'hi' && (
       <p className={`mt-2 text-sm text-gray-600 italic ${inconsolata.className}`}>
@@ -60,7 +60,7 @@ const MediaCarousel = () => {
         src: "/media-gallery/databridge-yc-vid.mp4", 
         alt: "DataBridge YC Video",
         quote: {
-          text: "हाथों की लकीर को तोड़ता मरोड़ता है हौसला रे।",
+          text: "हाथों की लकीर को तोड़ता मरोड़ता है हौसला रे।",
           language: 'hi'
         }
       },
