@@ -4,6 +4,8 @@ import { Github, Mail, Linkedin, FileText, Calendar, ChevronLeft, ChevronRight }
 import { Inria_Serif, Inconsolata } from 'next/font/google';
 import { Link as ScrollLink } from 'react-scroll';
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -26,14 +28,45 @@ const NeumorphicButton = ({ icon: Icon, children }: { icon?: React.ElementType, 
   </button>
 );
 
+// Add new Quote component
+const Quote = ({ text, language = 'en' }: { text: string, language?: string }) => (
+  <div className="mt-4">
+    <blockquote className={`text-xl italic text-black ${
+      language === 'hi' ? inriaSerif.className : inconsolata.className
+    }`}>
+      "{text}"
+    </blockquote>
+    {language === 'hi' && (
+      <p className={`mt-2 text-sm text-gray-600 italic ${inconsolata.className}`}>
+        Your will has the power to change your destiny
+      </p>
+    )}
+  </div>
+);
+
 const MediaCarousel = () => {
-    // Sample media items - replace with your actual media
     const mediaItems = [
-      { id: 1, src: "/api/placeholder/800/450", alt: "Project 1" },
-      { id: 2, src: "/api/placeholder/800/450", alt: "Project 2" },
-      { id: 3, src: "/api/placeholder/800/450", alt: "Project 3" },
-      { id: 4, src: "/api/placeholder/800/450", alt: "Project 4" },
-      { id: 5, src: "/api/placeholder/800/450", alt: "Project 5" },
+      { 
+        id: 1, 
+        src: "/media-gallery/arnav.jpg", 
+        alt: "Arnav Headshot",
+        quote: {
+          text: "Building the future, one line of code at a time",
+          language: 'en'
+        }
+      },
+      { 
+        id: 2, 
+        src: "/media-gallery/databridge-yc-vid.mp4", 
+        alt: "DataBridge YC Video",
+        quote: {
+          text: "हाथों की लकीर को तोड़ता मरोड़ता है हौसला रे।",
+          language: 'hi'
+        }
+      },
+      // { id: 3, src: "/media-gallery/databridge-yc-vid.mp4", alt: "DataBridge YC Demo" },
+      // { id: 4, src: "/media-gallery/databridge-yc-vid.mp4", alt: "DataBridge YC Demo" },
+      // { id: 5, src: "/media-gallery/databridge-yc-vid.mp4", alt: "DataBridge YC Demo" },
     ];
   
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,15 +81,23 @@ const MediaCarousel = () => {
   
     return (
       <div className="w-full space-y-4">
-        {/* Main Image Display */}
-        <div className="relative aspect-video bg-black">
-          <Image 
-            src={mediaItems[selectedIndex].src}
-            alt={mediaItems[selectedIndex].alt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+        {/* Main Media Display */}
+        <div className="relative aspect-[16/10] bg-black">
+          {mediaItems[selectedIndex].src.endsWith('.mp4') ? (
+            <video 
+              className="object-cover w-full h-full"
+              controls
+            >
+              <source src={mediaItems[selectedIndex].src} type="video/mp4" />
+            </video>
+          ) : (
+            <Image
+              src={mediaItems[selectedIndex].src}
+              alt={mediaItems[selectedIndex].alt}
+              fill
+              className="object-cover object-[center_67%]"
+            />
+          )}
           
           {/* Navigation Arrows */}
           <button 
@@ -72,7 +113,12 @@ const MediaCarousel = () => {
             <ChevronRight className="w-6 h-6 text-white" />
           </button>
         </div>
-  
+        
+        {/* Add Quote below media */}
+        <Quote
+          text={mediaItems[selectedIndex].quote?.text || ''}
+          language={mediaItems[selectedIndex].quote?.language || 'en'}
+        />
         {/* Thumbnails */}
         <div className="flex overflow-x-auto gap-4 pb-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {mediaItems.map((item, index) => (
@@ -83,13 +129,19 @@ const MediaCarousel = () => {
                 index === selectedIndex ? 'ring-2 ring-black' : 'hover:opacity-80'
               }`}
             >
-              <Image
-                src={item.src}
-                alt={`Thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="150px"
-              />
+              {item.src.endsWith('.mp4') ? (
+                <video className="object-cover w-full h-full">
+                  <source src={item.src} type="video/mp4" />
+                </video>
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={`Thumbnail ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="150px"
+                />
+              )}
             </button>
           ))}
         </div>
@@ -153,31 +205,42 @@ const HeroSection = () => {
             <p className="text-lg">
               I&apos;m a student pursuing a B.S. in Computer Science at Cornell University, 
               expected to graduate in May 2025. I&apos;m currently working on a product that 
-              allows developer to implement custom evaluation metrics and RLHF for their 
-              LLM applications via an API. You can learn more about Kiwi 🥝 
+              allows developers to implement RAG on user data for their LLM applications via an API.
+              It allows users to track how their data is used and define natural language access control rules.
+              You can learn more about DataBridge 🌉
               <a href="#" className="underline hover:text-blue-600 ml-1">here</a>.
             </p>
 
             <p className="text-lg">
               You can find projects that I&apos;ve worked on in the 
-              <a href="/playground" className="underline hover:text-blue-600 mx-1">playground</a> 
+              <a href="#playground-section" className="underline hover:text-blue-600 mx-1">playground</a> 
               section. If you&apos;re interested in speaking with me, you can book a time or contact me 
-              via the <a href="/contact" className="underline hover:text-blue-600">contact</a> section.
+              via the <a href="#contact-section" className="underline hover:text-blue-600">contact</a> section.
             </p>
 
             <p className="text-lg">
               Alternatively, you could try this ✍️ (experimental!) 
-              <a href="#" className="underline hover:text-blue-600 ml-1">chatbot</a>.
+              <a href="#contact-section" className="underline hover:text-blue-600 ml-1">chatbot</a>.
             </p>
           </div>
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
-            <NeumorphicButton icon={FileText}>Resume</NeumorphicButton>
-            <NeumorphicButton icon={Mail}>Email</NeumorphicButton>
-            <NeumorphicButton icon={Linkedin}>LinkedIn</NeumorphicButton>
-            <NeumorphicButton icon={Calendar}>Book a time</NeumorphicButton>
-            <NeumorphicButton icon={Github}>GitHub</NeumorphicButton>
+            <Link href="/resume.pdf">
+              <NeumorphicButton icon={FileText}>Resume</NeumorphicButton>
+            </Link>
+            <Link href="mailto:aa779@cornell.edu">
+              <NeumorphicButton icon={Mail}>Email</NeumorphicButton>
+            </Link>
+            <Link href="https://www.linkedin.com/in/arnavagrawal03/">
+              <NeumorphicButton icon={Linkedin}>LinkedIn</NeumorphicButton>
+            </Link>
+            <Link href="#contact-section">
+              <NeumorphicButton icon={Calendar}>Book a time</NeumorphicButton>
+            </Link>
+            <Link href="https://github.com/arnavagrawal">
+              <NeumorphicButton icon={Github}>GitHub</NeumorphicButton>
+            </Link>
           </div>
         </div>
       </div>
