@@ -145,6 +145,20 @@ const ProveMLContent = () => (
   </div>
 );
 
+const BrandSyncContent = () => (
+  <div className="relative pt-8 pb-8">
+    <div className="aspect-video w-full">
+      <iframe
+        className="w-full h-full rounded-xl border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)]"
+        src="https://www.youtube.com/embed/Q6twwYsYNKI"
+        title="BrandSync Demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  </div>
+);
+
 const ProjectsSection = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({ 
@@ -157,6 +171,24 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: "Play the Man",
+      description: "Learning to play against biased opponents",
+      imageUrl: "/project-thumbnails/poker.webp",
+      longDescription: "",
+      links: [],
+      customContent: <PlayTheManContent />
+    },
+    {
+      title: "BrandSync",
+      description: "Create, and post graphics and text for Social Media",
+      imageUrl: "/project-thumbnails/brandsync.png",
+      longDescription: "",
+      links: [
+        { label: "Visit Website", url: "https://brandsync.ai" }
+      ],
+      customContent: <BrandSyncContent />
+    },
+    {
       title: "ProveML",
       description: "A natural-language theorem prover for proposition logic",
       imageUrl: "/project-thumbnails/theorem-prover-quanta.jpg",
@@ -165,23 +197,6 @@ const ProjectsSection = () => {
         { label: "View on GitHub", url: "https://github.com/arnavagrawal03/ProveML" }
       ],
       customContent: <ProveMLContent />
-    },
-    {
-      title: "Play the Man",
-      description: "Learning to play against biased opponents",
-      imageUrl: "/project-thumbnails/pollution.jpg",
-      longDescription: "This research project explores strategies for playing against opponents with known biases in their decision-making process. We investigate both theoretical guarantees and practical algorithms for exploiting these biases in various game settings.",
-      links: [],
-      customContent: <PlayTheManContent />
-    },
-    {
-      title: "Data Sun",
-      description: "Creating a recommendation system for Cornell&apos;s newspaper",
-      imageUrl: "/project-thumbnails/recommendations.webp",
-      longDescription: "A sophisticated recommendation system built for Cornell's Daily Sun newspaper. The system analyzes reading patterns, content similarity, and user preferences to suggest relevant articles to readers, enhancing engagement and reader retention.",
-      links: [
-        { label: "View on GitHub", url: "https://github.com/cornell-sun/sun-recommendations" }
-      ]
     },
     {
       title: "HoopTracker",
@@ -193,19 +208,12 @@ const ProjectsSection = () => {
       ]
     },
     {
-      title: "Beyond Vector Search: Axiomatic RAG",
-      description: "Using traditional AI for retrieval",
-      imageUrl: "/project-thumbnails/axiomatic-retrieval.webp",
-      longDescription: "An experimental approach to retrieval-augmented generation that uses symbolic AI techniques instead of traditional vector similarity. This research explores how logical axioms can improve retrieval accuracy and provide more reliable information retrieval systems.",
-      links: []
-    },
-    {
-      title: "BrandSync",
-      description: "Create, and post graphics and text for Social Media",
-      imageUrl: "/project-thumbnails/brandsync.png",
-      longDescription: "BrandSync is an AI-powered social media management platform that helps businesses maintain consistent branding across multiple platforms. It automates content creation, scheduling, and analytics while ensuring brand guidelines are followed.",
+      title: "Data Sun",
+      description: "Creating a recommendation system for Cornell&apos;s newspaper",
+      imageUrl: "/project-thumbnails/recommendations.webp",
+      longDescription: "A sophisticated recommendation system built for Cornell's Daily Sun newspaper. The system analyzes reading patterns, content similarity, and user preferences to suggest relevant articles to readers, enhancing engagement and reader retention.",
       links: [
-        { label: "Visit Website", url: "https://brandsync.ai" }
+        { label: "View on GitHub", url: "https://github.com/cornell-sun/sun-recommendations" }
       ]
     }
   ];

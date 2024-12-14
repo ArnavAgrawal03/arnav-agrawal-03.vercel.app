@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from 'react';
-import { Mail, Linkedin, Calendar, Send, Mic } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Mail, Linkedin, Calendar, Send, Loader2 } from 'lucide-react';
 import { Inria_Serif, Inconsolata } from 'next/font/google';
 
 const inriaSerif = Inria_Serif({
@@ -28,28 +28,70 @@ const ChatInterface = () => {
   interface Message {
     text: string;
     sender: 'user' | 'bot';
+    role?: 'user' | 'assistant';
   }
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!inputText.trim()) return;
+    if (!inputText.trim() || isLoading) return;
     
-    // Add user message and echo response
-    setMessages([
-      ...messages,
-      { text: inputText, sender: 'user' },
-      { text: inputText, sender: 'bot' }
-    ]);
+    const userMessage: Message = { 
+      text: inputText, 
+      sender: 'user', 
+      role: 'user' 
+    };
+    setMessages(prev => [...prev, userMessage]);
     setInputText('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: messages.concat(userMessage).map(msg => ({
+            role: msg.role || (msg.sender === 'user' ? 'user' : 'assistant'),
+            content: msg.text
+          }))
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch response');
+      
+      const data = await response.json();
+      setMessages(prev => [...prev, { 
+        text: data.response, 
+        sender: 'bot',
+        role: 'assistant'
+      }]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { 
+        text: "I'm sorry, I'm having trouble connecting right now. Please try again later.", 
+        sender: 'bot',
+        role: 'assistant'
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="rounded-3xl border-2 border-black overflow-hidden bg-[#CCF1F5] shadow-[8px_8px_0_rgba(0,0,0,1)]">
       {/* Chat Window */}
-      <div className="h-[400px] p-6 overflow-y-auto space-y-4">
+      <div ref={chatWindowRef} className="h-[400px] p-6 overflow-y-auto space-y-4">
         {messages.map((message, index) => (
           <div 
             key={index}
@@ -62,6 +104,11 @@ const ChatInterface = () => {
             <p className={`${inconsolata.className}`}>{message.text}</p>
           </div>
         ))}
+        {isLoading && (
+          <div className="flex justify-center">
+            <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
+          </div>
+        )}
       </div>
 
       {/* Input Area */}
@@ -70,14 +117,16 @@ const ChatInterface = () => {
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="Please enter your text here ..."
+          placeholder="Ask me anything about my experience, skills, or projects..."
           className={`flex-1 bg-[#CCF1F5] rounded-full px-6 py-3 ${inconsolata.className} text-black placeholder-gray-600`}
+          disabled={isLoading}
         />
-        <button type="submit" className="p-3 hover:bg-gray-800 rounded-full transition-colors">
+        <button 
+          type="submit" 
+          className="p-3 hover:bg-gray-800 rounded-full transition-colors disabled:opacity-50"
+          disabled={isLoading}
+        >
           <Send className="w-6 h-6 text-white" />
-        </button>
-        <button type="button" className="p-3 hover:bg-gray-800 rounded-full transition-colors">
-          <Mic className="w-6 h-6 text-white" />
         </button>
       </form>
     </div>
