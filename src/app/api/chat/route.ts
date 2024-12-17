@@ -2,8 +2,17 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { RESUME_CONTEXT } from '@/lib/chat-context';
 
-// Add edge runtime
 export const runtime = 'edge';
+
+// Configure CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Max-Age': '86400',
+  // Add Permissions-Policy header to address warnings
+  'Permissions-Policy': 'interest-cohort=()'
+};
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -26,10 +35,24 @@ ${RESUME_CONTEXT}
 `;
 
 export async function POST(req: Request) {
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return new NextResponse(null, { headers: corsHeaders });
+  }
+
   const apiKey = process.env.OPENAI_API_KEY;
   
   if (!apiKey) {
-    return new Response('OpenAI API key not configured', { status: 500 });
+    return new NextResponse(
+      JSON.stringify({ error: 'OpenAI API key not configured' }), 
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          ...corsHeaders
+        }
+      }
+    );
   }
 
   try {
@@ -53,9 +76,7 @@ export async function POST(req: Request) {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          ...corsHeaders
         },
       }
     );
@@ -68,22 +89,18 @@ export async function POST(req: Request) {
         status: 500,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          ...corsHeaders
         },
       }
     );
   }
 }
 
-// Add OPTIONS handler for CORS preflight requests
+// Explicitly handle OPTIONS requests
 export async function OPTIONS(request: Request) {
   console.log("OPTIONS request received: ", request);
   return new NextResponse(null, {
     status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
+    headers: corsHeaders
   });
 } 
