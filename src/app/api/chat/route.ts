@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { RESUME_CONTEXT } from '@/lib/chat-context';
 
-export const runtime = 'edge';
-
 // Configure CORS headers
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
