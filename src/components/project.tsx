@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Inria_Serif, Inconsolata } from 'next/font/google';
 import Image from 'next/image';
 import PlayTheManContent from './play-the-man';
+import AmazonRoboticsContent from './amazon-robotics';
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -35,7 +36,7 @@ const ExternalLinkIcon = () => (
 
 interface ProjectCardProps {
   title: string;
-  description: string;
+  description: string | JSX.Element;
   imageUrl: string;
   onClick?: () => void;
 }
@@ -161,12 +162,18 @@ const BrandSyncContent = () => (
 
 const ProjectsSection = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ 
-    title: '', 
-    description: '', 
+  const [modalContent, setModalContent] = useState<{
+    title: string;
+    description: string | JSX.Element;
+    longDescription: string | JSX.Element;
+    links: { label: string; url: string }[];
+    customContent: React.ReactElement | null | undefined;
+  }>({
+    title: '',
+    description: '',
     longDescription: '',
-    links: [] as { label: string; url: string }[],
-    customContent: null as React.ReactElement | null | undefined
+    links: [],
+    customContent: null
   });
 
   const projects = [
@@ -199,17 +206,16 @@ const ProjectsSection = () => {
       customContent: <ProveMLContent />
     },
     {
-      title: "HoopTracker",
-      description: "Detailed statistics on pickup basketball games",
-      imageUrl: "/project-thumbnails/hooptracker.webp",
-      longDescription: "HoopTracker is a comprehensive basketball statistics tracking application designed for pickup games. It provides detailed analytics, performance metrics, and visualization tools to help players understand and improve their game.",
-      links: [
-        { label: "Visit Website", url: "https://hooptracker.vercel.app" }
-      ]
+      title: "Space Efficient Config Assembly",
+      description: <> Conclusions from my SDE Co-op at <strong>Amazon Robotics</strong> </>,
+      imageUrl: "/project-thumbnails/robots.webp",
+      longDescription: "I worked with the Dalinar team at Amazon Robotics on the Cardinal and Sparrow robots. I helped design and implement a configuration assembly system that helped reduce the size of remote updates and stored configurations by over 90%.",
+      links: [],
+      customContent: <AmazonRoboticsContent />
     },
     {
-      title: "Data Sun",
-      description: "Creating a recommendation system for Cornell&apos;s newspaper",
+      title: "CEO interviews can help predict company performance",
+      description: "",
       imageUrl: "/project-thumbnails/recommendations.webp",
       longDescription: "A sophisticated recommendation system built for Cornell's Daily Sun newspaper. The system analyzes reading patterns, content similarity, and user preferences to suggest relevant articles to readers, enhancing engagement and reader retention.",
       links: [
