@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Linkedin, Calendar, Send, Loader2 } from 'lucide-react';
 import { Inria_Serif, Inconsolata } from 'next/font/google';
+import Link from 'next/link';
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -160,9 +161,15 @@ const ContactSection = () => {
             </p>
                     {/* Contact Buttons */}
         <div className="flex flex-wrap gap-4 mb-12">
-          <ContactButton icon={Mail}>Email</ContactButton>
-          <ContactButton icon={Linkedin}>LinkedIn</ContactButton>
-          <ContactButton icon={Calendar}>Book a time</ContactButton>
+          <Link href="mailto:aa779@cornell.edu">
+            <ContactButton icon={Mail}>Email</ContactButton>
+          </Link>
+          <Link href="https://www.linkedin.com/in/arnavagrawal03/">
+            <ContactButton icon={Linkedin}>LinkedIn</ContactButton>
+          </Link>
+          <Link href="https://calendly.com/aa779-cornell/ai-data-pipeline-discussion">
+            <ContactButton icon={Calendar}>Book a time</ContactButton>
+          </Link>
         </div>
           </div>
         </div>
