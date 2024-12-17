@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { RESUME_CONTEXT } from '@/lib/chat-context';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+
+const openai = new OpenAI();
 
 // This would be your resume content and website info
 const CONTEXT = `
