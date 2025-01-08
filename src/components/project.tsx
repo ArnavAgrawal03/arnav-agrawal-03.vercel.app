@@ -4,6 +4,7 @@ import { Inria_Serif, Inconsolata } from 'next/font/google';
 import Image from 'next/image';
 import PlayTheManContent from './play-the-man';
 import AmazonRoboticsContent from './amazon-robotics';
+import EagleTalonPartnersContent from './eagle-talon-partners';
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -214,13 +215,12 @@ const ProjectsSection = () => {
       customContent: <AmazonRoboticsContent />
     },
     {
-      title: "CEO interviews can help predict company performance",
-      description: "",
+      title: "CEO Interviews and Stock Prices",
+      description: <> Insights from my Quantitative Research Internship at <strong>Eagle Talon Partners</strong> </>,
       imageUrl: "/project-thumbnails/recommendations.webp",
-      longDescription: "A sophisticated recommendation system built for Cornell's Daily Sun newspaper. The system analyzes reading patterns, content similarity, and user preferences to suggest relevant articles to readers, enhancing engagement and reader retention.",
-      links: [
-        { label: "View on GitHub", url: "https://github.com/cornell-sun/sun-recommendations" }
-      ]
+      longDescription: "Eagle Talon Partners is a hedge fund with focus on investing in companies that are in the process of changing leadership. I worked directly under the co-founder and CTO of the firm to build a model that extracts signals from public CEO interviews.",
+      links: [],
+      customContent: <EagleTalonPartnersContent />
     }
   ];
 
