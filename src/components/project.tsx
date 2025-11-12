@@ -243,14 +243,12 @@ const ProjectsSection = () => {
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-12 flex items-center">
-          <div className="w-1/3">
-            <h2 className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}>
-              <span className="font-[700]">Archive</span>
-              <span role="img" aria-label="archive">🗃️</span>
-            </h2>
-          </div>
-          <div className={`${inconsolata.className} w-2/3 space-y-4 text-lg text-gray-900`}>
+        <div className="mb-12">
+          <h2 className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}>
+            <span className="font-[700]">Archive</span>
+            <span role="img" aria-label="archive">🗃️</span>
+          </h2>
+          <div className={`${inconsolata.className} mt-6 space-y-4 text-lg text-gray-900`}>
             <p>
               This section contains most of the projects - mostly code and links to my
               GitHub - that I&apos;ve worked on. A lot of these projects were collaborations
