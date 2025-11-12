@@ -48,23 +48,24 @@ interface ProjectsSectionProps {
 }
 
 const ProjectCard = ({ title, description, imageUrl, onClick }: ProjectCardProps) => (
-  <div 
-    className="group relative rounded-3xl overflow-hidden bg-[#CCF1F5] border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[2px_2px_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 cursor-pointer"
+  <div
+    className="group relative flex flex-col rounded-3xl overflow-hidden bg-[#CCF1F5] border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[2px_2px_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 cursor-pointer"
     onClick={onClick}
   >
-    <div className="aspect-[16/9] w-full overflow-hidden relative h-[60%]">
-      <Image 
-        src={imageUrl} 
+    <div className="aspect-[16/9] w-full overflow-hidden relative">
+      <Image
+        src={imageUrl}
         alt={title}
         fill
         className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
       />
     </div>
-    <div className="absolute bottom-0 left-0 right-0 bg-[#CCF1F5] p-4 h-[40%] flex flex-col justify-center">
-      <h3 className={`${inriaSerif.className} text-xl font-medium mb-1 text-gray-900`}>
+    <div className="bg-[#CCF1F5] p-5 flex flex-col justify-center flex-1">
+      <h3 className={`${inriaSerif.className} text-xl font-medium mb-2 text-gray-900`}>
         {title}
       </h3>
-      <p className={`${inconsolata.className} text-sm text-gray-700`}>
+      <p className={`${inconsolata.className} text-sm sm:text-base text-gray-700`}>
         {description}
       </p>
     </div>
@@ -73,9 +74,9 @@ const ProjectCard = ({ title, description, imageUrl, onClick }: ProjectCardProps
 
 const ProveMLContent = () => (
   <div className="relative pt-8 pb-8">
-    <div className="flex justify-center gap-8">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
       {/* Column 1: Knowledge Base and Query */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Knowledge Base */}
         <div className="border-2 border-black rounded-xl p-6 inline-block">
           <h4 className={`${inriaSerif.className} text-lg font-bold text-gray-900 mb-4`}>
@@ -100,12 +101,12 @@ const ProveMLContent = () => (
       </div>
 
       {/* Column 2: Parser */}
-      <div className="border-2 border-black rounded-xl p-6 inline-block self-center">
+      <div className="border-2 border-black rounded-xl p-6 inline-block xl:self-center">
         <h4 className={`${inriaSerif.className} text-lg font-bold text-gray-900`}>Natural Language Parser</h4>
       </div>
 
       {/* Column 3: Logical Statements and Query Translation */}
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Knowledge Base Logic */}
         <div className="border-2 border-black rounded-xl p-6 inline-block">
           <h4 className={`${inriaSerif.className} text-lg font-bold text-gray-900 mb-4`}>
@@ -130,12 +131,12 @@ const ProveMLContent = () => (
       </div>
 
       {/* Column 4: Automated Prover */}
-      <div className="border-2 border-black rounded-xl p-6 inline-block self-center">
+      <div className="border-2 border-black rounded-xl p-6 inline-block xl:self-center">
         <h4 className={`${inriaSerif.className} text-lg font-bold text-gray-900`}>Automated Prover</h4>
       </div>
 
       {/* Column 5: Proof */}
-      <div className="border-2 border-black rounded-xl p-6 inline-block self-center">
+      <div className="border-2 border-black rounded-xl p-6 inline-block xl:self-center">
         <h4 className={`${inriaSerif.className} text-lg font-bold text-gray-900 mb-4`}>
           Proof
         </h4>
@@ -241,9 +242,9 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
   };
 
   return (
-    <section 
-      id="archive-section" 
-      className="py-20 px-8" 
+    <section
+      id="archive-section"
+      className="pt-32 pb-20 px-4 sm:px-6 md:px-8"
       style={{ backgroundColor: '#CCF1F5' }}
     >
       <div className="max-w-7xl mx-auto">
@@ -254,7 +255,7 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
             components={{
               h2: ({ children, ...props }) => (
                 <h2
-                  className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}
+                  className={`${inriaSerif.className} text-3xl sm:text-4xl font-bold flex flex-wrap items-center gap-3 text-gray-900`}
                   {...props}
                 >
                   {children}
@@ -262,7 +263,7 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
               ),
               p: ({ children, ...props }) => (
                 <p
-                  className={`${inconsolata.className} text-lg text-gray-900`}
+                  className={`${inconsolata.className} text-base sm:text-lg text-gray-900`}
                   {...props}
                 >
                   {children}
@@ -290,7 +291,7 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
         </div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project, index) => (
             <ProjectCard
               key={index}
@@ -305,14 +306,14 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
         {/* Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-[#CCF1F5] rounded-3xl p-8 w-[90vw] h-[85vh] border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] flex flex-col relative">
+            <div className="bg-[#CCF1F5] rounded-3xl p-6 md:p-8 w-full max-w-5xl max-h-[90vh] border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] flex flex-col relative">
               {/* Close button */}
-              <button 
+              <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center"
                 aria-label="Close modal"
               >
-                <svg 
+                <svg
                   className="w-6 h-6 text-gray-900" 
                   fill="none" 
                   stroke="currentColor" 
@@ -327,15 +328,15 @@ const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
                 </svg>
               </button>
 
-              <div className="flex-grow overflow-y-auto pr-4">
-                <h3 className={`${inriaSerif.className} text-3xl font-bold mb-6 text-gray-900 pr-12`}>{modalContent.title}</h3>
-                <p className={`${inconsolata.className} text-xl mb-4 text-gray-900`}>{modalContent.description}</p>
-                <p className={`${inconsolata.className} text-lg mb-8 text-gray-800`}>{modalContent.longDescription}</p>
+              <div className="flex-grow overflow-y-auto pr-0 md:pr-4">
+                <h3 className={`${inriaSerif.className} text-2xl sm:text-3xl font-bold mb-6 text-gray-900 pr-10`}>{modalContent.title}</h3>
+                <p className={`${inconsolata.className} text-lg sm:text-xl mb-4 text-gray-900`}>{modalContent.description}</p>
+                <p className={`${inconsolata.className} text-base sm:text-lg mb-8 text-gray-800`}>{modalContent.longDescription}</p>
                 {modalContent.customContent}
               </div>
 
               {modalContent.links.length > 0 && (
-                <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-200 justify-end">
+                <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-200 justify-center md:justify-end">
                   {modalContent.links.map((link, index) => (
                     <a
                       key={index}
