@@ -237,7 +237,7 @@ const ProjectsSection = () => {
 
   return (
     <section 
-      id="playground-section" 
+      id="archive-section" 
       className="py-20 px-8" 
       style={{ backgroundColor: '#CCF1F5' }}
     >
@@ -246,8 +246,8 @@ const ProjectsSection = () => {
         <div className="mb-12 flex items-center">
           <div className="w-1/3">
             <h2 className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}>
-              <span className="font-[700]">Playground</span>
-              <span role="img" aria-label="ladder">🪜</span>
+              <span className="font-[700]">Archive</span>
+              <span role="img" aria-label="archive">🗃️</span>
             </h2>
           </div>
           <div className={`${inconsolata.className} w-2/3 space-y-4 text-lg text-gray-900`}>
