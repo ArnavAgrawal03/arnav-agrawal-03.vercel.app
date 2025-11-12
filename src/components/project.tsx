@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PlayTheManContent from './play-the-man';
 import AmazonRoboticsContent from './amazon-robotics';
 import EagleTalonPartnersContent from './eagle-talon-partners';
+import ReactMarkdown from 'react-markdown';
 
 const inriaSerif = Inria_Serif({
   subsets: ['latin'],
@@ -40,6 +41,10 @@ interface ProjectCardProps {
   description: string | JSX.Element;
   imageUrl: string;
   onClick?: () => void;
+}
+
+interface ProjectsSectionProps {
+  introMarkdown: string;
 }
 
 const ProjectCard = ({ title, description, imageUrl, onClick }: ProjectCardProps) => (
@@ -161,7 +166,7 @@ const BrandSyncContent = () => (
   </div>
 );
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ introMarkdown }: ProjectsSectionProps) => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState<{
     title: string;
@@ -244,25 +249,44 @@ const ProjectsSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-12">
-          <h2 className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}>
-            <span className="font-[700]">Archive</span>
-            <span role="img" aria-label="archive">🗃️</span>
-          </h2>
-          <div className={`${inconsolata.className} mt-6 space-y-4 text-lg text-gray-900`}>
-            <p>
-              This section contains most of the projects - mostly code and links to my
-              GitHub - that I&apos;ve worked on. A lot of these projects were collaborations
-              with other really smart people.
-            </p>
-            <p>
-              Topics include: Algorithmic Game Theory, Theorem Proving, Recommendation
-              Systems, Knowledge Retrieval Systems, Computer Vision, Pacman, and Kaggle
-              Competitions.
-            </p>
-            <p className="text-sm">
-              📸 Thumbnail credits: Google Images, ChatGPT
-            </p>
-          </div>
+          <ReactMarkdown
+            className="space-y-4 text-gray-900"
+            components={{
+              h2: ({ children, ...props }) => (
+                <h2
+                  className={`${inriaSerif.className} text-4xl font-bold flex items-center gap-3 text-gray-900`}
+                  {...props}
+                >
+                  {children}
+                </h2>
+              ),
+              p: ({ children, ...props }) => (
+                <p
+                  className={`${inconsolata.className} text-lg text-gray-900`}
+                  {...props}
+                >
+                  {children}
+                </p>
+              ),
+              a: ({ children, ...props }) => (
+                <a className="underline hover:text-blue-600" {...props}>
+                  {children}
+                </a>
+              ),
+              em: ({ children, ...props }) => (
+                <em className={`${inconsolata.className} italic`} {...props}>
+                  {children}
+                </em>
+              ),
+              strong: ({ children, ...props }) => (
+                <strong className="font-semibold" {...props}>
+                  {children}
+                </strong>
+              )
+            }}
+          >
+            {introMarkdown}
+          </ReactMarkdown>
         </div>
 
         {/* Project Grid */}

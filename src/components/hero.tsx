@@ -5,6 +5,7 @@ import { Inria_Serif, Inconsolata } from 'next/font/google';
 import Navbar from '@/components/navbar';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 
 const inriaSerif = Inria_Serif({
@@ -28,10 +29,11 @@ const NeumorphicButton = ({ icon: Icon, children }: { icon?: React.ElementType, 
   </button>
 );
 
-// Quote section removed; will live elsewhere
-  
+type HeroSectionProps = {
+  introMarkdown: string;
+};
 
-const HeroSection = () => {
+const HeroSection = ({ introMarkdown }: HeroSectionProps) => {
   return (
     <div id="hero-section" className="min-h-screen p-8" style={{ backgroundColor: '#CCF1F5' }}>
       {/* Navigation */}
@@ -41,29 +43,25 @@ const HeroSection = () => {
       <div className="flex flex-col md:flex-row gap-16 items-start max-w-7xl mx-auto pt-24"> {/* Added pt-24 for padding top */}
         {/* Text Content (left) */}
         <div className="w-full md:w-7/12">
-          <h1 className={`text-5xl text-gray-900 font-normal mb-8 flex items-center gap-3 ${inriaSerif.className}`}>
-            Hi! I&apos;m Arnav
-            <span role="img" aria-label="laptop emoji" className="text-4xl">👨‍💻</span>
-          </h1>
-
-          <div className={`space-y-6 text-gray-800 ${inconsolata.className}`}>
-            <p className="text-lg">
-              I&apos;m a student pursuing a B.S. in Computer Science at Cornell University, 
-              expected to graduate in May 2025. I&apos;m currently working on a product that 
-              allows developers to implement RAG on user data for their LLM applications via an API.
-              It allows users to track how their data is used and define natural language access control rules.
-              You can learn more about DataBridge 🌉
-              <a href="#" className="underline hover:text-blue-600 ml-1">here</a>.
-            </p>
-
-            <p className="text-lg">
-              You can find projects that I&apos;ve worked on in the 
-              <Link href="/archive" className="underline hover:text-blue-600 mx-1">archive</Link> 
-              section. If you&apos;re interested in speaking with me, feel free to reach out via Email, LinkedIn, GitHub, or Twitter/X.
-            </p>
-
-            {/* Removed chatbot reference */}
-          </div>
+          <ReactMarkdown
+            className={`space-y-6 text-gray-800 ${inconsolata.className}`}
+            components={{
+              h1: ({ ...props }) => (
+                <h1
+                  className={`text-5xl text-gray-900 font-normal mb-8 flex items-center gap-3 ${inriaSerif.className}`}
+                  {...props}
+                />
+              ),
+              p: ({ ...props }) => (
+                <p className="text-lg" {...props} />
+              ),
+              a: ({ ...props }) => (
+                <a className="underline hover:text-blue-600" {...props} />
+              )
+            }}
+          >
+            {introMarkdown}
+          </ReactMarkdown>
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
