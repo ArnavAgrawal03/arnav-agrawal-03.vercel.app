@@ -1,5 +1,3 @@
 # Hi! I'm Arnav 👨‍💻
 
-I'm a student pursuing a B.S. in Computer Science at Cornell University, expected to graduate in May 2025. I'm currently working on a product that allows developers to implement RAG on user data for their LLM applications via an API. It allows users to track how their data is used and define natural language access control rules. You can learn more about DataBridge 🌉 [here](#).
-
-You can find projects that I've worked on in the [archive](/archive) section. If you're interested in speaking with me, feel free to reach out via Email, LinkedIn, GitHub, or Twitter/X.
+I live in San Francisco and work at [Morphik](https://morphik.ai). We're automating back-office tasks such as accounting and payroll for multi-entity companies. I was born in Nagpur, India and studied at Cornell via the Tata Scholarship. You can find previous projects that I've worked on in the [archive](/archive) section. If you're interested in speaking with me, feel free to reach out via Email, LinkedIn, or Twitter/X (I prefer email).
