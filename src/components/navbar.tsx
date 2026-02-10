@@ -48,6 +48,9 @@ const Navbar = () => {
 
         <div className="hidden md:flex gap-10 items-center text-xl">
           {renderHomeLink()}
+          <Link href="/writing" className="hover:text-gray-600">
+            Writing
+          </Link>
           <Link href="/archive" className="hover:text-gray-600">
             Archive
           </Link>
@@ -66,6 +69,9 @@ const Navbar = () => {
         <div className="md:hidden border-t border-[#787878] px-4 sm:px-8 pb-6">
           <div className="flex flex-col gap-4 text-lg pt-4">
             {renderHomeLink()}
+            <Link href="/writing" className="hover:text-gray-600" onClick={closeMenu}>
+              Writing
+            </Link>
             <Link href="/archive" className="hover:text-gray-600" onClick={closeMenu}>
               Archive
             </Link>

@@ -71,7 +71,7 @@ const HeroSection = ({ introMarkdown }: HeroSectionProps) => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10 justify-center md:justify-start">
-            <Link href="mailto:aa779@cornell.edu">
+            <Link href="mailto:arnav@morphik.ai">
               <NeumorphicButton icon={Mail}>Email</NeumorphicButton>
             </Link>
             <Link href="https://www.linkedin.com/in/arnavagrawal03/">

@@ -1,7 +1,7 @@
 export const RESUME_CONTEXT = `
 Arnav Agrawal
 Location: Ithaca, NY
-Contact: +1 (908) 370-2844 | aa779@cornell.edu
+Contact: +1 (908) 370-2844 | arnav@morphik.ai
 Online Presence: github.com/ArnavAgrawal03 | linkedin.com/in/ArnavAgrawal03/
 
 Key Skills:
@@ -67,7 +67,7 @@ Relevant Coursework:
 
 Additional Information:
 - Availability: Working on a startup - open to discuss collaboration and investment opportunities
-- Preferred contact method: Email (aa779@cornell.edu)
+- Preferred contact method: Email (arnav@morphik.ai)
 - Academic Status: Senior year student
 - Work Authorization: International student (Tata Scholar)
 - Languages: Demonstrated proficiency in both technical and business communication
