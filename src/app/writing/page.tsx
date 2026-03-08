@@ -33,7 +33,7 @@ export default function WritingPage() {
           <p
             className={`${ebGaramond.className} text-base sm:text-lg text-gray-600 mb-12`}
           >
-            Updated as my views change.
+            Updated as my views evolve.
           </p>
 
           <div className="flex flex-col gap-6">
