@@ -14,6 +14,7 @@ export interface WritingEntry {
 
 export function getWritingEntries(): WritingEntry[] {
   const writingDir = path.join(process.cwd(), "content", "writing");
+  if (!fs.existsSync(writingDir)) return [];
   const files = fs.readdirSync(writingDir).filter((f) => f.endsWith(".md"));
 
   return files.map((file) => {
@@ -42,6 +43,7 @@ export function getWritingContent(slug: string): string {
 
 export function getWritingSlugs(): string[] {
   const writingDir = path.join(process.cwd(), "content", "writing");
+  if (!fs.existsSync(writingDir)) return [];
   return fs
     .readdirSync(writingDir)
     .filter((f) => f.endsWith(".md"))
