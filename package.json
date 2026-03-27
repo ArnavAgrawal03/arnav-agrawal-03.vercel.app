@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/react-scroll": "^1.8.10",
+    "@vercel/analytics": "^2.0.1",
     "lucide-react": "^0.456.0",
     "next": "15.0.7",
     "openai": "^4.76.3",
